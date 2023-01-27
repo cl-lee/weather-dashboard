@@ -10,6 +10,7 @@ let searchInput = document.querySelector("#search-input");
 searchForm.addEventListener("submit", function (event){
     event.preventDefault();
     let cityInput = searchInput.value;
+    addCityToHistory(cityInput);
 })
 
 //      if form: add preventDefault();
@@ -17,8 +18,13 @@ searchForm.addEventListener("submit", function (event){
 
 // 2) save entered city into local storage (nest within (1))
 //      create: function addToHistory();     
-//      declare cityHistory as array, or retrieve from localStorage's citiesHistory if available    
-//      create array: let citiesHistoryArray = JSON.parse(localStorage.getItem("citiesHistory")) || [];
+function addCityToHistory(cityInput) {
+    let citiesHistoryArray = JSON.parse(localStorage.getItem("citiesHistory")) || [];
+    citiesHistoryArray.push(cityInput);
+    localStorage.setItem("citiesHistory", JSON.stringify(citiesHistoryArray));
+}     
+
+// declare cityHistory as array, or retrieve from localStorage's citiesHistory if available    
 //      citiesHistoryArray.push(cityInput);
 //      localStorage.setItem("citiesHistory", JSON.stringify(citiesHistoryArray));
 

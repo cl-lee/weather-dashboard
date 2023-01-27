@@ -24,10 +24,12 @@ function addCityToHistory(chosenCity) {
 
 // 3) add city to history section (after adding bootstrap list and buttons to the index file)
 //      on eventlistener "click" for city search: 
-//          for loop:
+function displaySearchHistory () {
+    let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
 //          let historyButton = document.createElement("button");
-//          historyButton.textContent = citiesHistoryArray[i];
+//          historyButton.textContent = searchHistoryArray[i];
 //          historyContainer.prepend(historyButton);
+}
 
 // 4) return today's weather
 function getTodaysWeather(chosenCity) {
@@ -97,5 +99,3 @@ function getTodaysWeather(chosenCity) {
             // let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
             // }
 }
-
-

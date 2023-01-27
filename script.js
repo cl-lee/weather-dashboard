@@ -52,27 +52,27 @@ function getTodaysWeather(chosenCity) {
             // `<h2>${cityInput} (${moment().format("D/M/YYYY")})</h2>
             // <p>Temp: 
             console.log(weatherData);
-            
+
             // get city name
             let chosenCityName = weatherData.city.name;
 
             // get today's date
             let todaysDate = moment().format("D/M/YYYY");
-            
+
             // get weather icon
             let weatherIconRef = weatherData.list[0].weather[0].icon;
             let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
 
             // get today's temperature
             let todaysTemperatureInKelvin = weatherData.list[0].main.temp;
-            let todaysTemperatureInCelsius = todaysTemperatureInKelvin-273.15;
-            let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius*100)/100;
+            let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
+            let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
             let todaysTemperature = `${todaysTemperatureRounded}°C`;
 
             // get today's wind speed
             let todaysWindSpeedMPS = weatherData.list[0].wind.speed;
-            let todaysWindSpeedKPH = todaysWindSpeedMPS*3.6;
-            let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH*100)/100} KPH`;
+            let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
+            let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
 
             // get today's humidity
             let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
@@ -80,8 +80,7 @@ function getTodaysWeather(chosenCity) {
 
 
 
-    // `
-    // )        
+
 
 
     // let pickedCity = document.createElement("h2")

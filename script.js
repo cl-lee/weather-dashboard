@@ -60,7 +60,8 @@ function getTodaysWeather(chosenCity) {
             let todaysDate = moment().format("D/M/YYYY");
             
             // get weather icon
-            
+            let weatherIconRef = weatherData.list[0].weather[0].icon;
+            let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
 
             // get today's temperature
             let todaysTemperatureInKelvin = weatherData.list[0].main.temp;

@@ -77,28 +77,25 @@ function getTodaysWeather(chosenCity) {
             // get today's humidity
             let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
         });
+        
+        // 5) return 5 day forecast
+            // for (let i = 0; i < 6; i++) {
+            // let getDate = moment(weatherData.list[0+8*i].dt, "X").format("D/M/YYYY");
 
-            // for (let i = 0; i < array.length; i++) {
-                
-                
+            // let weatherIconRef = weatherData.list[0+8*i].weather[0+8*i].icon;
+            // let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
+
+            // let todaysTemperatureInKelvin = weatherData.list[0+8*i].main.temp;
+            // let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
+            // let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
+            // let todaysTemperature = `${todaysTemperatureRounded}°C`;
+
+            // let todaysWindSpeedMPS = weatherData.list[0+8*i].wind.speed;
+            // let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
+            // let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
+
+            // let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
             // }
-
-
-
-
-    // let pickedCity = document.createElement("h2")
-    //      pickedCity.textContent = "cityInput"+" ("+moment().format("D/M/YYYY");
-    //      let todaysTemperature = document.createElement()
-    //  })
-    //              })
-    //                  
-    //      
-    // 
-    // 
-    // 
-
 }
 
-
-// 5) return 5 day forecast
 

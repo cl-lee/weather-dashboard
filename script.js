@@ -53,10 +53,15 @@ function getTodaysWeather(chosenCity) {
             // <p>Temp: 
             console.log(weatherData);
             
-            // get city name and today's date
+            // get city name
             let chosenCityName = weatherData.city.name;
+
+            // get today's date
             let todaysDate = moment().format("D/M/YYYY");
             
+            // get weather icon
+            
+
             // get today's temperature
             let todaysTemperatureInKelvin = weatherData.list[0].main.temp;
             let todaysTemperatureInCelsius = todaysTemperatureInKelvin-273.15;

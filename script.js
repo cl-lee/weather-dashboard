@@ -57,7 +57,7 @@ function getTodaysWeather(chosenCity) {
             let chosenCityName = weatherData.city.name;
 
             // get today's date
-            let todaysDate = moment().format("D/M/YYYY");
+            let getDate = moment(weatherData.list[0].dt, "X").format("D/M/YYYY");
 
             // get weather icon
             let weatherIconRef = weatherData.list[0].weather[0].icon;
@@ -78,7 +78,10 @@ function getTodaysWeather(chosenCity) {
             let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
         });
 
-
+            // for (let i = 0; i < array.length; i++) {
+                
+                
+            // }
 
 
 

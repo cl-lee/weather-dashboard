@@ -63,12 +63,13 @@ function getTodaysWeather(chosenCity) {
             let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius*100)/100;
             let todaysTemperature = `${todaysTemperatureRounded}°C`;
 
-            // get wind speed
+            // get today's wind speed
             let todaysWindSpeedMPS = weatherData.list[0].wind.speed;
             let todaysWindSpeedKPH = todaysWindSpeedMPS*3.6;
             let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH*100)/100} KPH`;
-            console.log(todaysWindSpeedRounded);
 
+            // get today's humidity
+            let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
         });
 
 

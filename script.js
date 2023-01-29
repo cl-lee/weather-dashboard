@@ -2,7 +2,7 @@
 let searchForm = document.querySelector(".form");
 let searchInput = document.querySelector("#search-input");
 let historyContainer = document.querySelector("#history"); 
-//let todayContainer = document.querySelector("#today");
+let todayContainer = document.querySelector("#today");
 
 displaySearchHistory();
 
@@ -11,40 +11,28 @@ displaySearchHistory();
 //      add eventlistener on "submit" for city search
 searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    let chosenCity = searchInput.value;
-    addCityToHistory(chosenCity);
+    let selectedCity = searchInput.value;
+    addCityToHistory(selectedCity);
     displaySearchHistory();
-    getTodaysWeather(chosenCity);
+    getTodaysWeather(selectedCity);
 })
 
 // 2) save entered city into local storage (nest within (1))
-//      create: function addToHistory();     
-function addCityToHistory(chosenCity) {
+function addCityToHistory(selectedCity) {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-    searchHistoryArray.unshift(chosenCity);
+    searchHistoryArray.unshift(selectedCity);
     localStorage.setItem("citySearchHistory", JSON.stringify(searchHistoryArray));
 }
 
-// 3) add city to history section (after adding bootstrap list and buttons to the index file)
 //      on eventlistener "click" for city search: 
 
-// function to display 6 recently searched cities in sidebar
-function displaySearchHistory () {
-    let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-        historyContainer.innerHTML = 
-        `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[3]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[4]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[5]}</a>`;
-}
 
+// --- DATA COLLECTION FUNCTIONS---
 // 4) return today's weather
-function getTodaysWeather(chosenCity) {
+function getTodaysWeather(selectedCity) {
     //          (i) get lat and lon of city:
     //              API query URL:
-    let geoDataURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + chosenCity + "&limit=5&appid=7018058f3ae12d10c5b76a1ecf1894e9"
+    let geoDataURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + selectedCity + "&limit=5&appid=7018058f3ae12d10c5b76a1ecf1894e9"
 
     fetch(geoDataURL)
         .then(response => response.json())
@@ -65,7 +53,7 @@ function getTodaysWeather(chosenCity) {
             console.log(weatherData);
 
             // get city name
-            let chosenCityName = weatherData.city.name;
+            let selectedCityName = weatherData.city.name;
 
             // get today's date
             let getDate = moment(weatherData.list[0].dt, "X").format("D/M/YYYY");
@@ -107,4 +95,28 @@ function getTodaysWeather(chosenCity) {
 
             // let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
             // }
+}
+
+// --- RENDERING FUNCTIONS ---
+// function to display the six most recently searched cities in sidebar
+function displaySearchHistory () {
+    let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
+        historyContainer.innerHTML = 
+        `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[3]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[4]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[5]}</a>`;
+}
+
+// function to display city name, today's date and today's weather icon
+function displayTodaysWeatherHeader (selectedCityName, getDate) {
+    todayContainer.innerHTML = 
+    `<div class="card">
+        <div class="card-body">
+            <h5 class="card-title">${selectedCityName} (${getDate}) </h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+    </div>`
 }

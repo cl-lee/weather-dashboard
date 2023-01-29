@@ -25,8 +25,10 @@ function addCityToHistory(selectedCity) {
     localStorage.setItem("citySearchHistory", JSON.stringify(searchHistoryArray));
 }
 
-//      on eventlistener "click" for city search: 
-
+// on eventlistener "click" for city search: 
+historyContainer.addEventListener("click", function(event) {
+    console.log(event);
+})
 
 // --- DATA COLLECTION FUNCTIONS---
 // 4) return today's weather
@@ -80,25 +82,6 @@ function getTodaysWeather(selectedCity) {
             displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity)
             displayFiveDayForecast(weatherData);
         });
-
-    // 5) return 5 day forecast
-    // for (let i = 0; i < 6; i++) {
-    // let getDate = moment(weatherData.list[0+8*i].dt, "X").format("D/M/YYYY");
-
-    // let weatherIconRef = weatherData.list[0+8*i].weather[0+8*i].icon;
-    // let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
-
-    // let todaysTemperatureInKelvin = weatherData.list[0+8*i].main.temp;
-    // let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
-    // let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
-    // let todaysTemperature = `${todaysTemperatureRounded}°C`;
-
-    // let todaysWindSpeedMPS = weatherData.list[0+8*i].wind.speed;
-    // let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
-    // let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
-
-    // let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
-    // }
 }
 
 // --- RENDERING FUNCTIONS ---
@@ -128,12 +111,11 @@ function displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysT
 }
 
 function displayFiveDayForecast(weatherData) {
-    
+    forecastCardDeck.innerHTML = "";
     
     for (let i = 1; i < 6; i++) {
         
         const index = -1+8*i;
-        console.log(moment(weatherData.list[index].dt, "X").format("D/M/YYYY hh:mm"));
 
         // get today's date
         let getDate = moment(weatherData.list[index].dt, "X").format("D/M/YYYY");
@@ -168,3 +150,4 @@ function displayFiveDayForecast(weatherData) {
         forecastCardDeck.append(forecastCard);
     }
 }
+

@@ -1,8 +1,10 @@
 // --- Global Variable ---
 let searchForm = document.querySelector(".form");
 let searchInput = document.querySelector("#search-input");
-//let historyContainer = document.querySelector("#history"); 
+let historyContainer = document.querySelector("#history"); 
 //let todayContainer = document.querySelector("#today");
+
+displaySearchHistory();
 
 // application functions:
 // 1) enter city in textbox
@@ -11,6 +13,7 @@ searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     let chosenCity = searchInput.value;
     addCityToHistory(chosenCity);
+    displaySearchHistory();
     getTodaysWeather(chosenCity);
 })
 
@@ -26,6 +29,12 @@ function addCityToHistory(chosenCity) {
 //      on eventlistener "click" for city search: 
 function displaySearchHistory () {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
+    for (let i = 0; i < 6; i++) {
+        historyListItem.innerHTML = `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[i]}</a>`;
+        historyContainer.append(historyListItem);
+    }
+
+//          add for loop maximum 6 times;
 //          let historyButton = document.createElement("button");
 //          historyButton.textContent = searchHistoryArray[i];
 //          historyContainer.prepend(historyButton);
@@ -35,7 +44,7 @@ function displaySearchHistory () {
 function getTodaysWeather(chosenCity) {
     //          (i) get lat and lon of city:
     //              API query URL:
-    let geoDataURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + chosenCity + "&limit=5&appid=7018058f3ae12d10c5b76a1ecf1894e9"
+    let geoDataURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + chosenCity + "&limit=5&appid=7018058f3ae12d10c5b76a1ecf1894e9"
 
     fetch(geoDataURL)
         .then(response => response.json())
@@ -63,7 +72,7 @@ function getTodaysWeather(chosenCity) {
 
             // get weather icon
             let weatherIconRef = weatherData.list[0].weather[0].icon;
-            let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
+            let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
 
             // get today's temperature
             let todaysTemperatureInKelvin = weatherData.list[0].main.temp;

@@ -78,7 +78,7 @@ function getTodaysWeather(selectedCity) {
             let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
 
             displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity)
-            displayFiveDayForecast(getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity);
+            displayFiveDayForecast(weatherData);
         });
 
     // 5) return 5 day forecast
@@ -127,17 +127,41 @@ function displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysT
     </div>`
 }
 
-function displayFiveDayForecast(getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity) {
+function displayFiveDayForecast(weatherData) {
+    
+    
+    for (let i = 1; i < 6; i++) {
+        // get today's date
+        let getDate = moment(weatherData.list[0+8*i].dt, "X").format("D/M/YYYY");
+    
+        // get weather icon
+        let weatherIconRef = weatherData.list[0+8*i].weather[0].icon;
+        let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
+    
+        // get today's temperature
+        let todaysTemperatureInKelvin = weatherData.list[0+8*i].main.temp;
+        let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
+        let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
+        let todaysTemperature = `${todaysTemperatureRounded}°C`;
+    
+        // get today's wind speed
+        let todaysWindSpeedMPS = weatherData.list[0+8*i].wind.speed;
+        let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
+        let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
+    
+        // get today's humidity
+        let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
 
-    let forecastCard = document.createElement("div");
-    forecastCard.setAttribute("class", "card");
-    forecastCard.innerHTML = 
-    `<h4 class="card-title">${getDate}</h4>
-    <img src="${weatherIconURL}" alt="The weather icon">
-    <div class="card-body">
-        <p class="card-text">Temp: ${todaysTemperature}</p>
-        <p class="card-text">Wind: ${todaysWindSpeedRounded}</p>
-        <p class="card-text">Humidity: ${todaysHumidity}</p>
-    </div>`;
-    forecastCardDeck.append(forecastCard);
+        let forecastCard = document.createElement("div");
+        forecastCard.setAttribute("class", "card");
+        forecastCard.innerHTML =
+            `<h4 class="card-title">${getDate}</h4>
+            <img src="${weatherIconURL}" alt="The weather icon">
+            <div class="card-body">
+            <p class="card-text">Temp: ${todaysTemperature}</p>
+            <p class="card-text">Wind: ${todaysWindSpeedRounded}</p>
+            <p class="card-text">Humidity: ${todaysHumidity}</p>
+            </div>`;
+        forecastCardDeck.append(forecastCard);
+    }
 }

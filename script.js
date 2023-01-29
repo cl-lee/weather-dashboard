@@ -1,8 +1,9 @@
 // --- Global Variable ---
 let searchForm = document.querySelector(".form");
 let searchInput = document.querySelector("#search-input");
-let historyContainer = document.querySelector("#history"); 
+let historyContainer = document.querySelector("#history");
 let todayContainer = document.querySelector("#today");
+let forecastCardDeck = document.querySelector(".forecast-card-deck");
 
 displaySearchHistory();
 
@@ -62,8 +63,6 @@ function getTodaysWeather(selectedCity) {
             let weatherIconRef = weatherData.list[0].weather[0].icon;
             let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
 
-            displayTodaysWeatherHeader(selectedCityName,getDate,weatherIconURL);
-
             // get today's temperature
             let todaysTemperatureInKelvin = weatherData.list[0].main.temp;
             let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
@@ -78,35 +77,35 @@ function getTodaysWeather(selectedCity) {
             // get today's humidity
             let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
 
-            displayTodaysWeatherHeader (selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity)
-
+            displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity)
+            displayFiveDayForecast(getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity);
         });
-        
-        // 5) return 5 day forecast
-            // for (let i = 0; i < 6; i++) {
-            // let getDate = moment(weatherData.list[0+8*i].dt, "X").format("D/M/YYYY");
 
-            // let weatherIconRef = weatherData.list[0+8*i].weather[0+8*i].icon;
-            // let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
+    // 5) return 5 day forecast
+    // for (let i = 0; i < 6; i++) {
+    // let getDate = moment(weatherData.list[0+8*i].dt, "X").format("D/M/YYYY");
 
-            // let todaysTemperatureInKelvin = weatherData.list[0+8*i].main.temp;
-            // let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
-            // let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
-            // let todaysTemperature = `${todaysTemperatureRounded}°C`;
+    // let weatherIconRef = weatherData.list[0+8*i].weather[0+8*i].icon;
+    // let weatherIconURL = `http://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
 
-            // let todaysWindSpeedMPS = weatherData.list[0+8*i].wind.speed;
-            // let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
-            // let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
+    // let todaysTemperatureInKelvin = weatherData.list[0+8*i].main.temp;
+    // let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
+    // let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
+    // let todaysTemperature = `${todaysTemperatureRounded}°C`;
 
-            // let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
-            // }
+    // let todaysWindSpeedMPS = weatherData.list[0+8*i].wind.speed;
+    // let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
+    // let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
+
+    // let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
+    // }
 }
 
 // --- RENDERING FUNCTIONS ---
 // function to display the six most recently searched cities in sidebar
-function displaySearchHistory () {
+function displaySearchHistory() {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-        historyContainer.innerHTML = 
+    historyContainer.innerHTML =
         `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
@@ -116,9 +115,9 @@ function displaySearchHistory () {
 }
 
 // function to display city name, today's date and today's weather icon
-function displayTodaysWeatherHeader (selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity) {
-    todayContainer.innerHTML = 
-    `<div class="card">
+function displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity) {
+    todayContainer.innerHTML =
+        `<div class="card">
         <div class="card-body">
             <h3 class="card-title">${selectedCityName} (${getDate}) <img src="${weatherIconURL}" alt="Icon for today's weather"></h3>
             <p class="card-text">Temp: ${todaysTemperature}</p>
@@ -126,4 +125,19 @@ function displayTodaysWeatherHeader (selectedCityName, getDate, weatherIconURL, 
             <p class="card-text">Humidity: ${todaysHumidity}</p>
         </div>
     </div>`
+}
+
+function displayFiveDayForecast(getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity) {
+
+    let forecastCard = document.createElement("div");
+    forecastCard.setAttribute("class", "card");
+    forecastCard.innerHTML = 
+    `<h4 class="card-title">${getDate}</h4>
+    <img src="${weatherIconURL}" alt="The weather icon">
+    <div class="card-body">
+        <p class="card-text">Temp: ${todaysTemperature}</p>
+        <p class="card-text">Wind: ${todaysWindSpeedRounded}</p>
+        <p class="card-text">Humidity: ${todaysHumidity}</p>
+    </div>`;
+    forecastCardDeck.append(forecastCard);
 }

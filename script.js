@@ -54,7 +54,6 @@ function getTodaysWeather(selectedCity) {
             //  todayContainer.append(
             // `<h2>${cityInput} (${moment().format("D/M/YYYY")})</h2>
             // <p>Temp: 
-            console.log(weatherData);
 
             // get city name
             let selectedCityName = weatherData.city.name;

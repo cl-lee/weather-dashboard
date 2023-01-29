@@ -1,15 +1,15 @@
-// --- Global Variable ---
-let searchForm = document.querySelector(".form");
-let searchInput = document.querySelector("#search-input");
+// --- Global Variables ---
 let historyContainer = document.querySelector("#history");
 let todayContainer = document.querySelector("#today");
 let forecastCardDeck = document.querySelector(".forecast-card-deck");
 
+// Renders city search history upon loading the page
 displaySearchHistory();
 
-// application functions:
-// 1) enter city in textbox
-//      add eventlistener on "submit" for city search
+// Event listener for clicking on search button
+let searchForm = document.querySelector(".form");
+let searchInput = document.querySelector("#search-input");
+
 searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     let selectedCity = searchInput.value;
@@ -18,18 +18,21 @@ searchForm.addEventListener("submit", function (event) {
     getTodaysWeather(selectedCity);
 })
 
-// 2) save entered city into local storage (nest within (1))
+// Saves input entered by users into local storage
 function addCityToHistory(selectedCity) {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
     searchHistoryArray.unshift(selectedCity);
     localStorage.setItem("citySearchHistory", JSON.stringify(searchHistoryArray));
 }
 
-// on eventlistener "click" for city search: 
-historyContainer.addEventListener("click", function(event) {
+// Event listener for clicking on a city in the search history 
+historyContainer.addEventListener("click", function (event) {
     let selectedCity = event.target.textContent;
     getTodaysWeather(selectedCity);
 })
+
+
+
 
 // --- DATA COLLECTION FUNCTIONS---
 // 4) return today's weather
@@ -112,28 +115,28 @@ function displayTodaysWeather(selectedCityName, getDate, weatherIconURL, todaysT
 
 function displayFiveDayForecast(weatherData) {
     forecastCardDeck.innerHTML = "";
-    
+
     for (let i = 1; i < 6; i++) {
-        
-        const index = -1+8*i;
+
+        const index = -1 + 8 * i;
 
         // get today's date
         let getDate = moment(weatherData.list[index].dt, "X").format("D/M/YYYY");
         // get weather icon
         let weatherIconRef = weatherData.list[index].weather[0].icon;
         let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
-    
+
         // get today's temperature
         let todaysTemperatureInKelvin = weatherData.list[index].main.temp;
         let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
         let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
         let todaysTemperature = `${todaysTemperatureRounded}°C`;
-    
+
         // get today's wind speed
         let todaysWindSpeedMPS = weatherData.list[index].wind.speed;
         let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
         let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
-    
+
         // get today's humidity
         let todaysHumidity = `${weatherData.list[index].main.humidity}%`;
 

@@ -27,17 +27,17 @@ function addCityToHistory(chosenCity) {
 
 // 3) add city to history section (after adding bootstrap list and buttons to the index file)
 //      on eventlistener "click" for city search: 
+
+// function to display 6 recently searched cities in sidebar
 function displaySearchHistory () {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-    for (let i = 0; i < 6; i++) {
-        historyListItem.innerHTML = `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[i]}</a>`;
-        historyContainer.append(historyListItem);
-    }
-
-//          add for loop maximum 6 times;
-//          let historyButton = document.createElement("button");
-//          historyButton.textContent = searchHistoryArray[i];
-//          historyContainer.prepend(historyButton);
+        historyContainer.innerHTML = 
+        `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[3]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[4]}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[5]}</a>`;
 }
 
 // 4) return today's weather

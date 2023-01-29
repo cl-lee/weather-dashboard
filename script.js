@@ -27,7 +27,8 @@ function addCityToHistory(selectedCity) {
 
 // on eventlistener "click" for city search: 
 historyContainer.addEventListener("click", function(event) {
-    console.log(event);
+    let selectedCity = event.target.textContent;
+    getTodaysWeather(selectedCity);
 })
 
 // --- DATA COLLECTION FUNCTIONS---

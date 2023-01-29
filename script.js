@@ -62,6 +62,8 @@ function getTodaysWeather(selectedCity) {
             let weatherIconRef = weatherData.list[0].weather[0].icon;
             let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
 
+            displayTodaysWeatherHeader(selectedCityName,getDate,weatherIconURL);
+
             // get today's temperature
             let todaysTemperatureInKelvin = weatherData.list[0].main.temp;
             let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
@@ -75,6 +77,9 @@ function getTodaysWeather(selectedCity) {
 
             // get today's humidity
             let todaysHumidity = `${weatherData.list[0].main.humidity}%`;
+
+            displayTodaysWeatherHeader (selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity)
+
         });
         
         // 5) return 5 day forecast
@@ -111,12 +116,14 @@ function displaySearchHistory () {
 }
 
 // function to display city name, today's date and today's weather icon
-function displayTodaysWeatherHeader (selectedCityName, getDate) {
+function displayTodaysWeatherHeader (selectedCityName, getDate, weatherIconURL, todaysTemperature, todaysWindSpeedRounded, todaysHumidity) {
     todayContainer.innerHTML = 
     `<div class="card">
         <div class="card-body">
-            <h5 class="card-title">${selectedCityName} (${getDate}) </h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h3 class="card-title">${selectedCityName} (${getDate}) <img src="${weatherIconURL}" alt="Icon for today's weather"></h3>
+            <p class="card-text">Temp: ${todaysTemperature}</p>
+            <p class="card-text">Wind: ${todaysWindSpeedRounded}</p>
+            <p class="card-text">Humidity: ${todaysHumidity}</p>
         </div>
     </div>`
 }

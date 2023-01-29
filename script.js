@@ -131,26 +131,29 @@ function displayFiveDayForecast(weatherData) {
     
     
     for (let i = 1; i < 6; i++) {
+        
+        const index = -1+8*i;
+        console.log(moment(weatherData.list[index].dt, "X").format("D/M/YYYY hh:mm"));
+
         // get today's date
-        let getDate = moment(weatherData.list[0+8*i].dt, "X").format("D/M/YYYY");
-    
+        let getDate = moment(weatherData.list[index].dt, "X").format("D/M/YYYY");
         // get weather icon
-        let weatherIconRef = weatherData.list[0+8*i].weather[0].icon;
+        let weatherIconRef = weatherData.list[index].weather[0].icon;
         let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
     
         // get today's temperature
-        let todaysTemperatureInKelvin = weatherData.list[0+8*i].main.temp;
+        let todaysTemperatureInKelvin = weatherData.list[index].main.temp;
         let todaysTemperatureInCelsius = todaysTemperatureInKelvin - 273.15;
         let todaysTemperatureRounded = Math.round(todaysTemperatureInCelsius * 100) / 100;
         let todaysTemperature = `${todaysTemperatureRounded}°C`;
     
         // get today's wind speed
-        let todaysWindSpeedMPS = weatherData.list[0+8*i].wind.speed;
+        let todaysWindSpeedMPS = weatherData.list[index].wind.speed;
         let todaysWindSpeedKPH = todaysWindSpeedMPS * 3.6;
         let todaysWindSpeedRounded = `${Math.round(todaysWindSpeedKPH * 100) / 100} KPH`;
     
         // get today's humidity
-        let todaysHumidity = `${weatherData.list[0+8*i].main.humidity}%`;
+        let todaysHumidity = `${weatherData.list[index].main.humidity}%`;
 
         let forecastCard = document.createElement("div");
         forecastCard.setAttribute("class", "card");

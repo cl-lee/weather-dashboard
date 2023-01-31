@@ -29,7 +29,7 @@ function addCityToHistory(selectedCity) {
 // Renders the six most recently searched cities in sidebar
 function renderSearchHistory() {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-    historyContainer.innerHTML =
+    historyContainer.innerHTML = 
         `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
@@ -112,7 +112,7 @@ function returnWeatherData(selectedCity) {
                     let forecastCard = document.createElement("div");
                     forecastCard.setAttribute("class", "card");
                     forecastCard.innerHTML =
-                        `<h4 class="card-title">${getDate}</h4>
+                    `<h4 class="card-title">${getDate}</h4>
                     <img src="${weatherIconURL}" alt="The weather icon">
                     <div class="card-body">
                     <p class="card-text">Temp: ${todaysTemperature}</p>

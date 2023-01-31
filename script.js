@@ -27,7 +27,6 @@ function addCityToHistory(selectedCity) {
 // Renders the six most recently searched cities in sidebar
 function renderSearchHistory() {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-    console.log("test");
     historyContainer.innerHTML =
         `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0] || ""}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1] || ""}</a>

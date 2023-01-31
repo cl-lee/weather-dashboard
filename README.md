@@ -31,4 +31,6 @@ The application can be accessed through the following URL: https://cl-lee.github
     - Today's humidity  
     ![Today's weather section](./assets/todays-weather.png)  
 
-    - ##### 
+    - ##### 5-Day Forecast
+    Just under today's weather section is the 5-Day Forecast section. One can find the temperature, wind-speed and humidity for the next five days here.
+    ![5-Day Forecast section](./assets/5-day-forecast.png)

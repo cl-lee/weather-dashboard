@@ -1,32 +1,34 @@
 # Weather Dashboard
 ## Description
-Welcome to the [Weather Dashboard](about:blank) repo! This project features a weather forecast app that can be used to view the weather outlook of a city in the world.
+Welcome to the [Weather Dashboard](https://cl-lee.github.io/weather-dashboard/) repo! This project features a weather forecast app that can be used to view the weather outlook of a city in the world.
+
+The app allows users to search for a city to view its weather forecast today and in the next five days. The app will also save the user's city search history, allowing them to view the city's weather forecast with just a click. Finally, the app will display a city's temperature, wind speed and humidity on the given dates.
 
 ## Prerequisites
 A web browser is required to access the application.
 
 ## Usage
 ### Application link  
-The application can be accessed through the following URL: about:blank.  
+The application can be accessed through the following URL: https://cl-lee.github.io/weather-dashboard/.  
 ![The application web page](./assets/start-screen.png)  
 
-### Application layout
-- #### The header
-    At the top of the application web page is the header. Inside the header is a short description of this app and today's date.  
-    ![The application header](./assets/header.png)
-
-- #### The main section
-    The main section contains the planner itself. In the planner are nine hourly timeblocks starting from 9am and ending at 5pm. Inside each timeblock are the hour, a textbox and a save button.  
-    ![The main section](./assets/main.png)
-    - The hour: Found on the left in the timeblock, it shows the corresponding hour of the timeblock
-    - The textbox: Found in the middle, for entering and showing event or task item(s)
-    - The save button: for saving entries in the textbox  
-    ![A timeblock](./assets/timeblock.png)
-
 ### Application usage
-- #### Saving and viewing a task/event
-    Users can enter task or event item(s) in a timeblock's text box. They can then click on the save button to store the item(s) on their machines. Once saved, the item(s) will remain in the timeblock after restarting the application web page.  
+- #### Find a city
+    - ##### The search box  
+    Located on the top left corner of the web page is the city search box. Users can enter a city name here, and then click on the "search" button to find its weather forecast.  
+    ![The search box](./assets/search-box.png)  
+    
+    - ##### The search history bar
+    Just under the search box is a bar that contains names of the six most recent searched cities. Users can click on any one of the cities to view its weather forecast.
+    ![The search history bar](./assets/search-history.png)  
 
-- #### The past, current and future hours
-    The timeblocks' textbox features a colour-code function based on the current time. Timeblocks with hours gone by will have their textboxes highlighted in grey, the current hour in red, and future hours in green.  
-    ![The timeblock's colour feature](./assets/colour-code.jpg)
+- #### The weather sections
+    - ##### Today's weather
+    Today's weather information is displayed on the right side of the web page, just under the page header. This section contains the following elements:
+    - Selected city's name, today's date, and an icon of today's weather outlook (e.g. sunny, cloudy, rainy, etc.)
+    - Today's temperature
+    - Today's wind-speed
+    - Today's humidity  
+    ![Today's weather section](./assets/todays-weather.png)  
+
+    - ##### 

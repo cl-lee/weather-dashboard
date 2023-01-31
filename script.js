@@ -5,7 +5,6 @@ let historyContainer = document.querySelector("#history");
 // Renders city search history upon loading the page
 renderSearchHistory();
 
-
 // Event listener for clicking on the search button
 let searchForm = document.querySelector(".form");
 let searchInput = document.querySelector("#search-input");
@@ -28,13 +27,14 @@ function addCityToHistory(selectedCity) {
 // Renders the six most recently searched cities in sidebar
 function renderSearchHistory() {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
+    
     historyContainer.innerHTML =
-        `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[3]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[4]}</a>
-        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[5]}</a>`;
+        `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0] || ""}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1] || ""}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2] || ""}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[3] || ""}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[4] || ""}</a>
+        <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[5] || ""}</a>`;
 }
 
 

@@ -28,8 +28,8 @@ function addCityToHistory(selectedCity) {
 // Renders the six most recently searched cities in sidebar
 function renderSearchHistory() {
     let searchHistoryArray = JSON.parse(localStorage.getItem("citySearchHistory")) || [];
-    historyContainer.innerHTML = 
-    `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
+    historyContainer.innerHTML =
+        `<a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[0]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[1]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[2]}</a>
         <a href="#" class="list-group-item list-group-item-action active">${searchHistoryArray[3]}</a>
@@ -56,22 +56,22 @@ function returnWeatherData(selectedCity) {
     let geoDataURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + selectedCity + "&limit=5&appid=7018058f3ae12d10c5b76a1ecf1894e9"
     forecastCardDeck.innerHTML = "";
     fetch(geoDataURL)
-    .then(response => response.json())
-    .then(function (geoData) {
-        let lat = geoData[0].lat
+        .then(response => response.json())
+        .then(function (geoData) {
+            let lat = geoData[0].lat
             let lon = geoData[0].lon
 
             // Collects the weather data
             return fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=7018058f3ae12d10c5b76a1ecf1894e9`)
         })
         .then(response => response.json())
-        .then(function (weatherData) {          
-            
+        .then(function (weatherData) {
+
             forecastHeader.innerHTML = "";
             forecastHeader.innerHTML = '5-Day Forecast:';
-            
+
             for (let i = 0; i < 6; i++) {
-                
+
                 // index for determining date of weather forecast
                 let index;
                 if (i === 0) {
@@ -82,10 +82,10 @@ function returnWeatherData(selectedCity) {
 
                 // get city name
                 let selectedCityName = weatherData.city.name;
-                
+
                 // get date
                 let getDate = moment(weatherData.list[index].dt, "X").format("D/M/YYYY");
-                
+
                 // get weather icon
                 let weatherIconRef = weatherData.list[index].weather[0].icon;
                 let weatherIconURL = `https://openweathermap.org/img/wn/${weatherIconRef}@2x.png`;
